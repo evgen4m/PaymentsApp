@@ -33,6 +33,11 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+    buildFeatures {
+        viewBinding = true
+    }
+
 }
 
 dependencies {
@@ -42,6 +47,7 @@ dependencies {
     val lifecycleVersion = "2.6.2"
     val httpLoggingVersion = "4.9.3"
     val navVersion = "2.7.5"
+    val swipeRefreshLayoutVersion = "1.1.0"
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
@@ -65,5 +71,8 @@ dependencies {
 
     //Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion")
+
+    // SwipeRefreshLayout
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:$swipeRefreshLayoutVersion")
 
 }

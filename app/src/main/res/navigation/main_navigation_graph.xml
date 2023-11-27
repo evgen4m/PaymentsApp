@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation_graph"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.esoft.paymentsapp.ui.fragment.login.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_paymentsListFragment"
+            app:destination="@id/paymentsListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/paymentsListFragment"
+        android:name="com.esoft.paymentsapp.ui.fragment.paymentsList.PaymentsListFragment"
+        android:label="fragment_payments_list"
+        tools:layout="@layout/fragment_payments_list" />
+</navigation>
