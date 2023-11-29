@@ -4,7 +4,7 @@ sealed class LoginState {
 
     data object Success : LoginState()
 
-    data object Loading : LoginState()
+    data class Loading(val loading: Boolean) : LoginState()
 
     data class Error(val error: String) : LoginState()
 

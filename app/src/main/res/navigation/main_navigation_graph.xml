@@ -14,9 +14,11 @@
             android:id="@+id/action_loginFragment_to_paymentsListFragment"
             app:destination="@id/paymentsListFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/paymentsListFragment"
         android:name="com.esoft.paymentsapp.ui.fragment.paymentsList.PaymentsListFragment"
         android:label="fragment_payments_list"
         tools:layout="@layout/fragment_payments_list" />
+
 </navigation>

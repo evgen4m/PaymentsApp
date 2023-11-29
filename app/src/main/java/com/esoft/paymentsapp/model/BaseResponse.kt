@@ -1,10 +1,19 @@
 package com.esoft.paymentsapp.model
 
-open class BaseResponse
-
-data class AuthResponse<T: BaseResponse>(
+data class AuthResponse(
     val success: Boolean,
-    val response: T
+    val response: SuccessResponse
 )
+
+sealed class SuccessResponse {
+
+    data class Token(val token: String) : SuccessResponse()
+
+    data class ErrorModel(
+        val code: Int,
+        val message: String
+    ) : SuccessResponse()
+
+}
 
 

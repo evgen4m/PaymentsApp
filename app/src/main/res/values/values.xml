@@ -6,7 +6,7 @@
         <item name="android:textColor">?attr/colorOnPrimary</item>
     </style>
 
-    <style name="TextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+    <style name="TextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
         <item name="boxBackgroundColor">?attr/colorOnPrimaryContainer</item>
         <item name="errorEnabled">true</item>
     </style>

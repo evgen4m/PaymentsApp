@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace = "com.esoft.paymentsapp"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.esoft.paymentsapp"
         minSdk = 26
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 

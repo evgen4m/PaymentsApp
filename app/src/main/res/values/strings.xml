@@ -7,4 +7,8 @@
     <string name="authorization">Authorization</string>
     <string name="remember_me">Remember me</string>
 
+    <string name="enter_user_name">User name is empty</string>
+    <string name="password_is_short">The password must be at least 5 sims!</string>
+    <string name="empty_login_fileds">Username and password are empty\n</string>
+
 </resources>
