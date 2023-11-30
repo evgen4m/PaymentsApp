@@ -14,6 +14,8 @@ sealed class SuccessResponse {
         val message: String
     ) : SuccessResponse()
 
+    data class PaymentsItems(val items: List<PaymentItem>) : SuccessResponse()
+
 }
 
 

@@ -1,7 +1,10 @@
 package com.esoft.paymentsapp.ui.fragment.login
 
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
+import android.widget.FrameLayout
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -10,6 +13,7 @@ import com.esoft.paymentsapp.R
 import com.esoft.paymentsapp.app.PaymentsApp
 import com.esoft.paymentsapp.databinding.FragmentLoginBinding
 import com.google.android.material.snackbar.Snackbar
+
 
 class LoginFragment: Fragment(R.layout.fragment_login) {
 
@@ -46,8 +50,12 @@ class LoginFragment: Fragment(R.layout.fragment_login) {
 
     private fun observeViewModel() {
         viewModel.screenState.observe(viewLifecycleOwner, ::updateUi)
-        viewModel.userNameErrorEvent.observe(viewLifecycleOwner) { showUserNameError() }
-        viewModel.passwordErrorEvent.observe(viewLifecycleOwner) { showPasswordError() }
+        viewModel.userNameErrorEvent.observe(viewLifecycleOwner) {
+            showErrorMessage(getString(R.string.enter_user_name))
+        }
+        viewModel.passwordErrorEvent.observe(viewLifecycleOwner) {
+            showErrorMessage(getString(R.string.password_is_short))
+        }
         viewModel.dataFieldsEmpty.observe(viewLifecycleOwner) { showEmptyFieldsError() }
         viewModel.userIsAuthorized.observe(viewLifecycleOwner) { isAuthorized ->
             if (isAuthorized) navigateToPaymentsListScreen()
@@ -66,14 +74,6 @@ class LoginFragment: Fragment(R.layout.fragment_login) {
         )
     }
 
-    private fun showPasswordError() {
-        binding.textPassInput.error = getString(R.string.password_is_short)
-    }
-
-    private fun showUserNameError() {
-        binding.textFirstnameInput.error = getString(R.string.enter_user_name)
-    }
-
     private fun updateUi(loginState: LoginState) {
         when(loginState) {
             is LoginState.Success -> navigateToPaymentsListScreen()
@@ -89,7 +89,14 @@ class LoginFragment: Fragment(R.layout.fragment_login) {
     }
 
     private fun showErrorMessage(message: String) {
-        Snackbar.make(requireView(), message, Snackbar.LENGTH_LONG).show()
+        val snackBar = Snackbar.make(requireView(), message, Snackbar.LENGTH_SHORT)
+        val view = snackBar.view
+        val textView = view.findViewById(com.google.android.material.R.id.snackbar_text) as TextView
+        textView.maxLines = 1
+        val params = view.layoutParams as FrameLayout.LayoutParams
+        params.gravity = Gravity.CENTER_HORIZONTAL or Gravity.TOP
+        view.layoutParams = params
+        snackBar.show()
     }
 
     private fun navigateToPaymentsListScreen() {

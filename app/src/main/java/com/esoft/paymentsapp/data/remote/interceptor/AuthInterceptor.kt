@@ -9,7 +9,7 @@ class AuthInterceptor(
 ) : Interceptor {
 
     private companion object {
-        private const val AUTHORIZATION = "Authorization"
+        private const val TOKEN = "token"
         private const val APP_KEY = "app-key"
         private const val APP_KEY_VALUE = "12345"
         private const val VERSION = "v"
@@ -22,7 +22,7 @@ class AuthInterceptor(
         request = request.newBuilder()
             .addHeader(APP_KEY, APP_KEY_VALUE)
             .addHeader(VERSION, VERSION_NAME)
-            .addHeader(AUTHORIZATION, finalToken?: "")
+            .addHeader(TOKEN, finalToken?: "")
             .build()
 
         return chain.proceed(request)

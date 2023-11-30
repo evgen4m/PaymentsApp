@@ -48,7 +48,7 @@ class LoginViewModel(private val authRepository: AuthRepository): ViewModel() {
         handleLoginData(name = username, password = password)
     }
 
-    private fun handleLoginResult(result: ResponseResult) {
+    private fun handleLoginResult(result: ResponseResult<Nothing>) {
         _screenState.value = LoginState.Loading(loading = false)
         when(result) {
             is ResponseResult.Success -> {

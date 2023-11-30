@@ -11,9 +11,11 @@ import kotlinx.coroutines.withContext
 
 interface AuthRepository {
 
-    suspend fun login(authModel: AuthModel) : ResponseResult
+    suspend fun login(authModel: AuthModel) : ResponseResult<Nothing>
 
     fun checkUserIsAuthorized(): Boolean
+
+    fun logout()
 
 }
 
@@ -26,14 +28,14 @@ class AuthRepositoryImpl(
         const val UNKNOWN_ERROR = "Unknown error"
     }
 
-    override suspend fun login(authModel: AuthModel): ResponseResult = withContext(Dispatchers.IO) {
+    override suspend fun login(authModel: AuthModel): ResponseResult<Nothing> = withContext(Dispatchers.IO) {
         supervisorScope {
             try {
                 val result = authDataSource.login(authModel = authModel)
                 if (result.success) {
                     val token = (result.response as SuccessResponse.Token)
                     settingsDataSource.saveToken(token = token.token)
-                    ResponseResult.Success
+                    ResponseResult.Success()
                 } else {
                     val errorMessage = (result.response as SuccessResponse.ErrorModel)
                     ResponseResult.ServerError(error = errorMessage.message)
@@ -46,6 +48,10 @@ class AuthRepositoryImpl(
 
     override fun checkUserIsAuthorized(): Boolean {
         return settingsDataSource.getToken() != null
+    }
+
+    override fun logout() {
+        settingsDataSource.clearToken()
     }
 
 

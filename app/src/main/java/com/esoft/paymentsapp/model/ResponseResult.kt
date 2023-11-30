@@ -1,13 +1,13 @@
 package com.esoft.paymentsapp.model
 
 
-sealed class ResponseResult {
+sealed class ResponseResult<out T> {
 
-    data object Success: ResponseResult()
+    data class Success<out T>(val data: T? = null): ResponseResult<T>()
 
-    data class ServerError(val error: String) : ResponseResult()
+    data class ServerError(val error: String) : ResponseResult<Nothing>()
 
-    data class Error(val error: String) : ResponseResult()
+    data class Error(val error: String) : ResponseResult<Nothing>()
 
 }
 
